@@ -1,0 +1,272 @@
+{
+  "Activator": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Activation function used in the network",
+    "value": "Rectified Linear Unit"
+  },
+  "AddFlipAndRotation": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Add random flip and rotation",
+    "value": "True"
+  },
+  "AddRandomNoise": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Add random noise",
+    "value": "True"
+  },
+  "ApplyClahe": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Apply Contrast limited adaptive histogram equivalent",
+    "value": "True"
+  },
+  "BatchSize": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Minibatch size (Larger batchsize tends to get better results)",
+    "value": "10"
+  },
+  "Class1Color": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Class1 color",
+    "value": "black"
+  },
+  "Class1Ignore": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Ignore class1 or not",
+    "value": "False"
+  },
+  "Class1Weight": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Class1 weight (Only used when the Weighted Cross Entropy Loss function is selected)",
+    "value": "1"
+  },
+  "Class2Color": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Class2 color",
+    "value": "red"
+  },
+  "Class2Ignore": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Ignore class2 or not",
+    "value": "False"
+  },
+  "Class2Weight": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Class2 weight (Only used when the Weighted Cross Entropy Loss function is selected)",
+    "value": "3"
+  },
+  "Class3Color": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Class3 color",
+    "value": "green"
+  },
+  "Class3Ignore": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Ignore class3 or not",
+    "value": "False"
+  },
+  "Class3Weight": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Class3 weight (Only used when the Weighted Cross Entropy Loss function is selected)",
+    "value": "10"
+  },
+  "Class4Color": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Class4 color",
+    "value": "blue"
+  },
+  "Class4Ignore": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Ignore class4 or not",
+    "value": "False"
+  },
+  "Class4Weight": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Class4 weight (Only used when the Weighted Cross Entropy Loss function is selected)",
+    "value": "2"
+  },
+  "Class5Color": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Class5 color",
+    "value": "white"
+  },
+  "Class5Ignore": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Ignore class5 or not",
+    "value": "False"
+  },
+  "Class5Weight": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Class5 weight (Only used when the Weighted Cross Entropy Loss function is selected)",
+    "value": "15"
+  },
+  "CutMix": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Cut-Mix Augmentation",
+    "value": "True"
+  },
+  "EpochNum": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The number of epochs (How many times AI learns whole dataset)",
+    "value": "50"
+  },
+  "FinalLearningRate": {
+    "isBool": true,
+    "isNumeric": true,
+    "sentence": "Final learning rate (only used by AdaBound optimizer)",
+    "value": "0.1"
+  },
+  "ImageSource": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Training image source",
+    "value": ""
+  },
+  "InitialLearningRate": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Initial learning rate",
+    "value": "1e-3"
+  },
+  "InitialModelPath": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Initial Model Path (For transfer learning and continuous learning)",
+    "value": ""
+  },
+  "LabelSource": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Corresponding label source",
+    "value": ""
+  },
+  "LossFunction": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Loss Function",
+    "value": "Weighted Cross Entropy"
+  },
+  "MiddleLayerNum": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The number of middle layers in the network",
+    "value": "20"
+  },
+  "MiddleLayerScale": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The scale of middle layers in the network to original size",
+    "value": "16"
+  },
+  "Normalizer": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Normalization method used in the network",
+    "value": "Layer Normalization"
+  },
+  "Optimizer": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Optimization method of model parameters",
+    "value": "Nesterov Accelerated Gradient"
+  },
+  "OutputDestination": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Output folder path",
+    "value": ""
+  },
+  "OutputGraphAndLog": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Output the graph and log of learning process",
+    "value": "True"
+  },
+  "OutputGraphAndLogInterval": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The number of epochs per the graph and log output",
+    "value": "1"
+  },
+  "OutputImage": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Output test results with learned parameters of the current epoch",
+    "value": "True"
+  },
+  "OutputImageInterval": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The number of epochs per image output",
+    "value": "1"
+  },
+  "OverSampling": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Duplicate images containing a lot of \"important\" class objects",
+    "value": "4"
+  },
+  "SchedularStepRate": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Each step, learning rate is updated by following formular (Learning rate * Step rate)",
+    "value": "0.9"
+  },
+  "SchedularStepSize": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The number of epochs per learning rate update",
+    "value": "5"
+  },
+  "SetClassInfoAutomatically": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Get class information from feeded labels",
+    "value": "False"
+  },
+  "TakeSnapshot": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Output learned model parameters on the specified interval",
+    "value": "True"
+  },
+  "TakeSnapshotInterval": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The number of epochs per learned model parameters output",
+    "value": "5"
+  },
+  "ValidationRatio": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "The ratio of images used for validation",
+    "value": "0.1"
+  },
+  "WeightDecay": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Weight Decay (Penalty)",
+    "value": "5e-4"
+  }
+}

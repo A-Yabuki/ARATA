@@ -1,0 +1,116 @@
+{
+  "AutoLog": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Log Automatically When the Analysis is Started",
+    "value": "True"
+  },
+  "Calculation": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Enable Calculation",
+    "value": "True"
+  },
+  "ColorSpace": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Color Space",
+    "value": "RGB"
+  },
+  "DifferenceCalculation": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Enable Difference Calculation",
+    "value": "True"
+  },
+  "HyphaeCalculation": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Enable Hyphae Calculation",
+    "value": "False"
+  },
+  "ImageFormat": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Image Format",
+    "value": "JPEG (.jpg\/.jpeg)"
+  },
+  "InScreenCalculationMode": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Enable In-Screen Calculation Mode",
+    "value": "True"
+  },
+  "IndefiniteResolution": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Various Resolution",
+    "value": "True"
+  },
+  "ModelPath": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Model Path",
+    "value": ""
+  },
+  "MultiScalePrediction": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "MultiScale Prediction",
+    "value": "True"
+  },
+  "NetArcPath": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Network Architecture Settings Path",
+    "value": ""
+  },
+  "PositionFixing": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Correct the position of all images based on the position of projected objects in the images",
+    "value": "True"
+  },
+  "ProbabilityEnhancement": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Enhance Probability for Static Objects",
+    "value": "False"
+  },
+  "RealTimeScale": {
+    "isBool": true,
+    "isNumeric": false,
+    "sentence": "Introduce Real Time Scale To Analysis",
+    "value": "False"
+  },
+  "Resolution": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Resolution",
+    "value": "600"
+  },
+  "SavePath": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Save Path",
+    "value": ""
+  },
+  "SourcePath": {
+    "isBool": false,
+    "isNumeric": false,
+    "sentence": "Source Path",
+    "value": ""
+  },
+  "TimeRange": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Ranges of Images used to Locate Current Roots from Past\/Future Root Location",
+    "value": ""
+  },
+  "WindowSize": {
+    "isBool": false,
+    "isNumeric": true,
+    "sentence": "Window Size",
+    "value": "1200"
+  }
+}
