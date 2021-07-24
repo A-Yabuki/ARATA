@@ -1,0 +1,164 @@
+{
+    "ClassColor":{
+        "White":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"white",
+            "value": "FFFFFF"
+        },
+        "Yellow":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"yellow",
+            "value": "FFFF00"
+        },
+        "Pink":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"pink",
+            "value": "FF00FF"
+        },
+        "Aqua":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"aqua",
+            "value": "00FFFF"
+        },
+        "Red":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"red",
+            "value": "FF0000"
+        },
+        "Green":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"green",
+            "value": "00FF00"
+        },
+        "Blue":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"blue",
+            "value": "0000FF"
+        },
+        "Black":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"black",
+            "value": "000000"
+        }
+    },
+    "LossFunc":{
+        "CrossEntropy":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Cross Entropy",
+            "value": "CrossEntropy"
+        },
+        "WeightedCE":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Weighted Cross Entropy",
+            "value": "WeightedCE"
+        },
+        "FocalCE":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Focal Cross Entropy",
+            "value": "FocalCE"
+        },
+        "DiceLoss":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Generalized Dice Similarity",
+            "value": "Dice"
+        }
+    },
+    "Optimizer":{
+        "SGD":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Stochastic Gradient Descent",
+            "value": "SGD"
+        },
+        "NesterovAG":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Nesterov Accelerated Gradient",
+            "value": "NesterovAG"
+        },
+        "AdaBound":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"AdaBound",
+            "value": "AdaBound"
+        }        
+    },
+    "MiddleLayerScale":{
+        "Eight":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"8",
+            "value": "8"
+        },
+        "Sixteen":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"16",
+            "value": "16"
+        },
+        "ThirtyTwo":{
+            "isBool": false,
+            "isNumeric": true,
+            "sentence":"32",
+            "value": "32"
+        }
+    },
+    "ActivationFunc":{
+        "ReLU":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Rectified Linear Unit",
+            "value": "ReLU"
+        },
+        "LearkyReLU":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Learky ReLU",
+            "value": "LearkyReLU"
+        },
+        "HardSwish":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Hard Swish",
+            "value": "HardSwish"
+        },
+        "TanhExp":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Exponential Hypabolic Tangent",
+            "value": "TanhExp"
+        }
+    },
+    "NormalizationMethod":{
+        "Batch":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Batch Normalization",
+            "value": "BatchNorm"
+        },
+        "Layer":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Layer Normalization",
+            "value": "LayerNorm"
+        },
+        "Instance":{
+            "isBool": false,
+            "isNumeric": false,
+            "sentence":"Instance Normalization",
+            "value": "InstanceNorm"
+        }
+    }
+}
