@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{e0cd13be-a6b7-47fb-8e25-4a13813cd3bd}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>main.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>CondaEnv|CondaEnv|test2</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <CommandLineArguments>2 2</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="arata\analyzer\tracer\__pycache__\cropper.cpython-37.pyc" />
+    <Content Include="arata\analyzer\tracer\__pycache__\merger.cpython-37.pyc" />
+    <Content Include="arata\analyzer\tracer\__pycache__\preprocessor.cpython-37.pyc" />
+    <Content Include="arata\analyzer\tracer\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="resources\analysis_configuration.json" />
+    <Content Include="resources\blurmask.png" />
+    <Content Include="resources\constants.json" />
+    <Content Include="resources\settings.json" />
+    <Content Include="resources\training_configuration.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="arata\analyzer\calculator\imgcalc.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\globals.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\path_utils.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\nn\network\nn_base.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.py" />
+    <Compile Include="arata\analyzer\calculator\l1\algos.py" />
+    <Compile Include="arata\analyzer\calculator\l1\tf.py" />
+    <Compile Include="arata\analyzer\calculator\l1\_util.py" />
+    <Compile Include="arata\analyzer\calculator\l1\__init__.py" />
+    <Compile Include="arata\analyzer\calculator\dt.py" />
+    <Compile Include="arata\analyzer\calculator\root_identifier.py" />
+    <Compile Include="arata\analyzer\calculator\skeletonizer.py" />
+    <Compile Include="arata\analyzer\calculator\__init__.py" />
+    <Compile Include="arata\analyzer\analyzer.py" />
+    <Compile Include="arata\analyzer\tracer\postprocessor.py" />
+    <Compile Include="arata\analyzer\tracer\preprocessor.py" />
+    <Compile Include="arata\analyzer\tracer\root_painter.py" />
+    <Compile Include="arata\analyzer\tracer\__init__.py" />
+    <Compile Include="arata\analyzer\__init__.py" />
+    <Compile Include="arata\common\enum.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\error_handler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\functions.py" />
+    <Compile Include="arata\common\image_container.py" />
+    <Compile Include="arata\common\image_tools.py" />
+    <Compile Include="arata\common\interprocess_communicator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\logger.py" />
+    <Compile Include="arata\common\singleton.py" />
+    <Compile Include="arata\common\assertion.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\wrapper_collection.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\common\__init__.py" />
+    <Compile Include="arata\common\configurations.py" />
+    <Compile Include="arata\common\constants.py" />
+    <Compile Include="arata\nn\activator\tanhexp.py" />
+    <Compile Include="arata\nn\activator\__init__.py" />
+    <Compile Include="arata\nn\evaluator\evaluator.py" />
+    <Compile Include="arata\nn\evaluator\__init__.py" />
+    <Compile Include="arata\nn\loader.py" />
+    <Compile Include="arata\nn\lossfunc\focal_loss.py" />
+    <Compile Include="arata\nn\lossfunc\generalized_dice_loss.py" />
+    <Compile Include="arata\nn\lossfunc\__init__.py" />
+    <Compile Include="arata\nn\functions.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\nn\net.py" />
+    <Compile Include="arata\nn\network\deeplab_v3plus_xception.py" />
+    <Compile Include="arata\nn\network\initial_weight.py" />
+    <Compile Include="arata\nn\network\kernel_sharing_atrous_convolution.py" />
+    <Compile Include="arata\nn\network\solov2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\nn\network\__init__.py" />
+    <Compile Include="arata\nn\normalizer\layer_norm.py" />
+    <Compile Include="arata\nn\normalizer\__init__.py" />
+    <Compile Include="arata\nn\optimizer\adabound.py" />
+    <Compile Include="arata\nn\optimizer\__init__.py" />
+    <Compile Include="arata\nn\param_setter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\nn\predictor.py" />
+    <Compile Include="arata\nn\trainer.py" />
+    <Compile Include="arata\nn\vision\progress_viz.py" />
+    <Compile Include="arata\nn\validator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="arata\nn\vision\__init__.py" />
+    <Compile Include="arata\nn\__init__.py" />
+    <Compile Include="arata\trainer\trainer.py" />
+    <Compile Include="arata\trainer\__init__.py" />
+    <Compile Include="arata\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="arata\" />
+    <Folder Include="arata\analyzer\" />
+    <Folder Include="arata\analyzer\calculator\" />
+    <Folder Include="arata\analyzer\calculator\l1\" />
+    <Folder Include="arata\analyzer\tracer\" />
+    <Folder Include="arata\analyzer\tracer\__pycache__\" />
+    <Folder Include="arata\common\" />
+    <Folder Include="arata\nn\" />
+    <Folder Include="arata\nn\activator\" />
+    <Folder Include="arata\nn\evaluator\" />
+    <Folder Include="arata\nn\lossfunc\" />
+    <Folder Include="arata\nn\network\" />
+    <Folder Include="arata\nn\normalizer\" />
+    <Folder Include="arata\nn\optimizer\" />
+    <Folder Include="arata\nn\vision\" />
+    <Folder Include="arata\trainer\" />
+    <Folder Include="resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|going_deeper" />
+    <InterpreterReference Include="CondaEnv|CondaEnv|test2" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
