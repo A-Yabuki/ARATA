@@ -65,5 +65,5 @@ def cvt_dpi2mmpd(dpi: float) -> float:
 
 
 def extract_trend(signal: List[float]):
-    return tf.l1(signal, sigma=0.005)
+    return tf.l1(signal, regularizer=0.005)
     

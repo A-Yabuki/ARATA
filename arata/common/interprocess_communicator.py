@@ -184,7 +184,7 @@ class Message():
             return self._bytes2int(val)
 
 
-    def _str2bytes(val: str) -> Tuple[int, bytes]:
+    def _str2bytes(self, val: str) -> Tuple[int, bytes]:
         
         byte_msg = val.encode('utf-8')
         byte_length = len(byte_msg)
@@ -268,25 +268,26 @@ class Communicator(Singleton):
         DetailedErrorMessages.MEMORY_READ_ERROR, 
         ErrorType.IGNORABLE_ERROR
         )
-    def read_mm(self):
+    def read_mm(self, name: str):
 
-        if self.mm is None:
+        if self.mms is None:
             return
 
-        self.mm.seek(0)
-        read_data = self.mm.read()
+        self.mms[name].seek(0)
+        read_data = self.mms[name].read()
         
         return read_data
 
 
 def report_progress(process_name: str, progress: int, info: str = "") -> None:
     
-    ui_mode = CurrentUI().current_ui
+    cur_ui = CurrentUI()
+    ui_mode = cur_ui.current_ui
 
     if (ui_mode == UIEnum.GUI_MODE):
         msg = Message()
         info_msg = str.format("{0} [Process: {1}] ", info, process_name)
-        data = msg.encode_progress(int(progress_val), info_msg)
+        data = msg.encode_progress(int(progress), info_msg)
         communicator = Communicator()
         communicator.open_mm(MemoryMappedFileName.REPORTER)
         communicator.write_mm(data)

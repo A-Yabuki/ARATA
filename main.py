@@ -47,7 +47,7 @@ def main(mode: ModeEnum, ui: UIEnum) -> bool:
 
             if msg.msg_category == int(Message.SUPERVISOR_ORDER):
             
-                if result.free_int_header == int(1):
+                if data.free_int_header == int(1):
                     process.kill()
                     communicator.close_mm()
                     return False
@@ -83,14 +83,14 @@ if __name__ == "__main__":
            or not (ui in UIEnum.__members__.values()):
             ChainedErrorHandler(
                 "Invalid argument is given.\n" \
-                "Required two arguments are 'mode' (0: analyzer, 1: trainer) and 'ui' (0: GUI, 1: CUI).", 
+                "Required two arguments are 'mode' (1: analyzer, 2: trainer) and 'ui' (1: GUI, 2: CUI).", 
                 ErrorType.INVALID_INPUT_VALUE_ERROR)
 
 
     except IndexError:
         ChainedErrorHandler(
             "The number of arguments didn't matched the required number (2).\n" \
-            "Required two arguments are 'mode' (0: analyzer, 1: trainer) and 'ui' (0: GUI, 1: CUI).", 
+            "Required two arguments are 'mode' (1: analyzer, 2: trainer) and 'ui' (1: GUI, 2: CUI).", 
             ErrorType.INVALID_INPUT_VALUE_ERROR)
 
     except:

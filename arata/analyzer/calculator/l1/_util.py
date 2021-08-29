@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import numpy as np
 import pandas as pd
 
 def _strip_na(signal: 'np.ndarray[np.float]') -> 'np.ndarray[np.float]':

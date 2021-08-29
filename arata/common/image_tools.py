@@ -63,7 +63,7 @@ def binarize(src, bgr_lower, bgr_upper):
 def extract_color(src, bgr_lower, bgr_upper):
     gray = binarize(src, bgr_lower, bgr_upper) # BGRからマスクを作成
     result = cv2.bitwise_and(src, src, mask=gray) # 元画像とマスクを合成
-    return img_bin
+    return result
 
 
 class PhaseOnlyCorrelation():
@@ -353,7 +353,7 @@ class NoiseCreator():
 
     rng = np.random.default_rng()
     
-    def __init__():
+    def __init__(self):
         pass
 
     @classmethod
@@ -564,7 +564,7 @@ class NoiseCreator():
 class RandomNoiseCreator(NoiseCreator):
 
     def __init__(self):
-        super().__init__(self)
+        super().__init__()
 
     @classmethod
     def apply_random_unsharpmask(cls, img_src):

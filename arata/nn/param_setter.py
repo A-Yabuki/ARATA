@@ -10,9 +10,10 @@ from arata.common.error_handler import ChainedErrorHandler, DisplayErrorMessages
 
 from arata.nn.activator.tanhexp import tanhexp
 from arata.nn.functions import try_gpu
+from arata.nn.loader import NNDataset
+from arata.nn.lossfunc import focal_loss, generalized_dice_loss
 from arata.nn.optimizer.adabound import AdaBound
 from arata.nn.network.deeplab_v3plus_xception import DeepLabSettings
-from arata.nn.loader import NNDataset
 from arata.nn.predictor import Predictor
 from arata.nn.trainer import Trainer
 
@@ -166,10 +167,10 @@ def _get_loss_func(loss_func: str, class_weight) -> Callable:
         return torch.nn.CrossEntropyLoss(weight)
 
     elif loss_func == LossFuncJsonConst.FocalCE:
-        return FocalLossWithOutOneHot(gamma=2)
+        return focal_loss.FocalLossWithOutOneHot(gamma=2)
 
     elif loss_func == LossFuncJsonConst.DiceLoss:
-        return GeneralizedSoftDiceLoss
+        return generalized_dice_loss.GeneralizedSoftDiceLoss
 
     else:
         ChainedErrorHandler(DisplayErrorMessages.INVALID_INPUT_VALUE%("loss func", loss_func), ErrorType.INVALID_INPUT_VALUE_ERROR)

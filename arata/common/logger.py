@@ -9,7 +9,7 @@ from .constants import ResourcePathConst
 def create_log_file():
         
     if not os.path.exists(ResourcePathConst.LOG_OUTPUT_PATH):
-        os.mkdir(log_folder_path)
+        os.mkdir(ResourcePathConst.LOG_OUTPUT_PATH)
 
 
 class Logger():
