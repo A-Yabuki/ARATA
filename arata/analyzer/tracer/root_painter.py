@@ -89,8 +89,8 @@ class RootPainter():
         crop_size = int(crop_size)
         h, w = img.shape[:2]
             
-        hs = [i for i in range(0, h, crop_size)]
-        ws = [i for i in range(0, w, crop_size)]
+        hs = [i for i in range(0, h + 1, crop_size)]
+        ws = [i for i in range(0, w + 1, crop_size)]
             
         try:
 
