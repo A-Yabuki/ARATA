@@ -89,8 +89,8 @@ class RootPainter():
         crop_size = int(crop_size)
         h, w = img.shape[:2]
             
-        hs = [i for i in range(0, h + 1, crop_size)]
-        ws = [i for i in range(0, w + 1, crop_size)]
+        hs = [i for i in range(0, h, crop_size)]
+        ws = [i for i in range(0, w, crop_size)]
             
         try:
 
@@ -112,39 +112,38 @@ class RootPainter():
 
         crop_size = int(crop_size)
         orig_h, orig_w = img.shape[:2]
-        remainderH = crop_size - (orig_h % crop_size)
-        remainderW = crop_size - (orig_w % crop_size)
 
-        if (remainderH!=0) | (remainderW!=0):
+        remainderH = orig_h % crop_size
+        remainderW = orig_w % crop_size
+        padH = crop_size - remainderH if remainderH !=0 else 0
+        padW = crop_size - remainderW if remainderW !=0 else 0
                 
-            top, bottom, left, right = 0, 0, 0, 0
+        top, bottom, left, right = 0, 0, 0, 0
                 
-            if remainderH!=0:
-                top = remainderH // 2
-                bottom = remainderH - top
+        top = remainderH // 2
+        bottom = remainderH - top
 
-            if remainderW!=0:
-                left = remainderW // 2
-                right = remainderW - left
+        left = remainderW // 2
+        right = remainderW - left
 
-            img = cv2.copyMakeBorder(img, top, bottom, left, right, borderType=cv2.BORDER_CONSTANT, value=(0, 0, 0))
+        img = cv2.copyMakeBorder(img, top, bottom, left, right, borderType=cv2.BORDER_CONSTANT, value=(0, 0, 0))
                 
         return img
 
 
-    def _merge(self, imgs, hs, vs):
+    def _merge(self, imgs, hs, ws):
 
         merged = None
-        for v in range(vs):
+        for h in range(hs):
 
             tmp_h = None
-            for h in range(hs):
+            for w in range(ws):
                     
                 if tmp_h is None:
-                    tmp_h = imgs[hs * v + h]
+                    tmp_h = imgs[ws * h + w]
                     
                 else:
-                    tmp_h = np.concatenate((tmp_h, imgs[hs * v + h]), axis=1)
+                    tmp_h = np.concatenate((tmp_h, imgs[ws * h + w]), axis=1)
 
             if merged is None:
                 merged = tmp_h
@@ -154,7 +153,7 @@ class RootPainter():
 
         return merged
 
-    
+
     def _colorize(self, pred, color_dict):
         
         h, w = pred.shape[:2]
