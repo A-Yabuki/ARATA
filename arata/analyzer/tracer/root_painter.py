@@ -28,7 +28,7 @@ class RootPainter():
             crop_size: int, 
             dpi: int, 
             multi_scale: bool, 
-            boundary: Tuple[Tuple[int, int], Tuple[int, int]], 
+            roi: Tuple[Tuple[int, int], Tuple[int, int]], 
             class_dict: Dict) -> None:
 
         r""" 
@@ -40,7 +40,7 @@ class RootPainter():
             crop_size (int): crop size
             dpi (int): dpi
             multi_scale (bool): use multi scale or not
-            boundary (((int, int), (int, int))): region of images to analyze
+            roi (((int, int), (int, int))): region of interest
             class_dict (Dict): dictionary having class informations
         """
 
@@ -59,8 +59,8 @@ class RootPainter():
 
             # Add padding, such that the image size can be divided by the crop size
 
-            img = self._pad(img, crop_size)
-            hs, ws, cropped = self._crop(img, file_name, crop_size)
+            img, (pad_top, pad_bottom, pad_left, pad_right) = self._pad(img, crop_size)
+            hs, ws, cropped = self._crop(img, crop_size)
 
             flat = list(chain.from_iterable(cropped))
 
@@ -68,13 +68,15 @@ class RootPainter():
             
             merged = self._merge(preds, hs, ws)
 
-            colored = self._colorize(merged, class_dict)
+            original_size_merged = merged[pad_top : merged.shape[0] - pad_bottom, pad_left : merged.shape[1] - pad_right]
+
+            colored = self._colorize(original_size_merged, class_dict)
 
             h, w = colored.shape[:-1]
-            min_y = boundary[0][0] if boundary[0][0] > 0 else 0
-            min_x = boundary[1][0] if boundary[1][0] > 0 else 0
-            max_y = h + boundary[0][1] if boundary[0][1] < 0 else h
-            max_x = w + boundary[1][1] if boundary[1][1] < 0 else w
+            min_y = roi[0][0] if roi[0][0] > 0 else 0
+            min_x = roi[1][0] if roi[1][0] > 0 else 0
+            max_y = h + roi[0][1] if roi[0][1] < 0 else h
+            max_x = w + roi[1][1] if roi[1][1] < 0 else w
             
             out = colored[min_y : max_y, min_x : max_x]
             cv2.imwrite("{0}/{1}.png".format(dst, file_name), out)
@@ -83,7 +85,7 @@ class RootPainter():
             report_progress("root tracing", progress, "")
 
 
-    def _crop(self, img, file_name, crop_size):
+    def _crop(self, img, crop_size):
 
         # crop images
         crop_size = int(crop_size)
@@ -128,7 +130,7 @@ class RootPainter():
 
         img = cv2.copyMakeBorder(img, top, bottom, left, right, borderType=cv2.BORDER_CONSTANT, value=(0, 0, 0))
                 
-        return img
+        return img, (top, bottom, left, right)
 
 
     def _merge(self, imgs, hs, ws):
