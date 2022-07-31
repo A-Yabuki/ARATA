@@ -10,6 +10,7 @@ from types import MappingProxyType
 from .constants import AnalysisConfigJsonConst, ImageExtensionConst, JsonItem, ResourcePathConst, TrainingConfigJsonConst
 from .enum import ErrorType
 from .error_handler import ChainedErrorHandler
+from .platform_utils import mkdir_recursive
 from .singleton import Singleton
 
 
@@ -292,24 +293,12 @@ class AnalysisConfig(JsonLoader):
         self._set_folder_paths()
 
         save_loc = self.config[AnalysisConfigJsonConst.SAVE_LOCATION]
-        if (not os.path.exists(save_loc)):
-            try:
-                os.mkdir(save_loc)
-
-            except:
-                error_msg = str.format("Failed to create folders to save. [invalid path: {0}]", save_loc)
-                ChainedErrorHandler(error_msg, ErrorType.CRITICAL_ERROR)
+        mkdir_recursive(save_loc)
 
         # Create folders
 
         for folder in self._path_dict.values():
-            if not os.path.exists(folder):
-                try:
-                    os.mkdir(folder)
-
-                except:
-                    error_msg = str.format("Failed to create folders to save. [invalid path: {0}]", folder)
-                    ChainedErrorHandler(error_msg, ErrorType.CRITICAL_ERROR)
+            mkdir_recursive(folder)
     
         self._set_file_paths()
 

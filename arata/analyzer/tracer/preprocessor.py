@@ -66,7 +66,7 @@ class ImagePreprocessor():
             report_progress("preprocessing", (i+2) * 100 // len(src_paths), "")
 
 
-    def find_position_constant_area(self) -> Tuple[Tuple[int, int], Tuple[int, int]]:
+    def find_area_appeared_in_all_images(self) -> Tuple[Tuple[int, int], Tuple[int, int]]:
 
         r"""
         Calculates min-max values of the relative distance against the initial position.

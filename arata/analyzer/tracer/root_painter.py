@@ -56,12 +56,11 @@ class RootPainter():
 
             file_name, _ = read_file_name(split_path(img_path)[1])
             img = imread(img_path, cv2.IMREAD_COLOR)
-
+            
             # Add padding, such that the image size can be divided by the crop size
 
             img, (pad_top, pad_bottom, pad_left, pad_right) = self._pad(img, crop_size)
             hs, ws, cropped = self._crop(img, crop_size)
-
             flat = list(chain.from_iterable(cropped))
 
             preds = predictor.predict(flat, multi_scale)
@@ -69,7 +68,6 @@ class RootPainter():
             merged = self._merge(preds, hs, ws)
 
             original_size_merged = merged[pad_top : merged.shape[0] - pad_bottom, pad_left : merged.shape[1] - pad_right]
-
             colored = self._colorize(original_size_merged, class_dict)
 
             h, w = colored.shape[:-1]
@@ -79,7 +77,8 @@ class RootPainter():
             max_x = w + roi[1][1] if roi[1][1] < 0 else w
             
             out = colored[min_y : max_y, min_x : max_x]
-            cv2.imwrite("{0}/{1}.png".format(dst, file_name), out)
+            out_path = "{0}/{1}.png".format(dst, file_name)
+            success = cv2.imwrite(out_path, out)
 
             progress = (i) * 100 // len(img_paths)
             report_progress("root tracing", progress, "")
@@ -120,13 +119,11 @@ class RootPainter():
         padH = crop_size - remainderH if remainderH !=0 else 0
         padW = crop_size - remainderW if remainderW !=0 else 0
                 
-        top, bottom, left, right = 0, 0, 0, 0
-                
-        top = remainderH // 2
-        bottom = remainderH - top
+        top = padH // 2
+        bottom = padH - top
 
-        left = remainderW // 2
-        right = remainderW - left
+        left = padW // 2
+        right = padW - left
 
         img = cv2.copyMakeBorder(img, top, bottom, left, right, borderType=cv2.BORDER_CONSTANT, value=(0, 0, 0))
                 

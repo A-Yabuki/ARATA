@@ -6,7 +6,9 @@
 safe
 help
 log/
-
+save/
+resources/
+data/
 
 
 Byte-compiled / optimized / DLL files

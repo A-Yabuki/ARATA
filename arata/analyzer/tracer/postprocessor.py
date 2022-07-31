@@ -51,7 +51,7 @@ class Postprocessor():
     
     def _remove_small_particles(self, bin_src: 'np.ndarray[np.uint8] (H, W)', particle_size: int = 50) -> 'np.ndarray[np.uint8] (H, W)':
 
-        dst = np.copy(bin_src)
+        dst = np.copy(bin_src.astype(np.uint8))
         cnts, hierarchy = cv2.findContours(bin_src.astype(np.uint8), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
 
         if hierarchy is None:
@@ -65,7 +65,7 @@ class Postprocessor():
 
                 if len(cnts[i]) <= particle_size :
                     small_cnts_append(cnts[i])
-
+  
         cv2.drawContours(dst, small_cnts, -1, 0, -1)
 
 

@@ -8,6 +8,7 @@ from arata.common.configurations import TrainingConfig
 from arata.common.constants import ResourcePathConst, TrainingConfigJsonConst
 from arata.common.enum import ErrorType
 from arata.common.error_handler import ChainedErrorHandler, DetailedErrorMessages
+from arata.common.platform_utils import mkdir_recursive
 from arata.common.wrapper_collection import watch_error
 from arata.nn.loader import DataLoader
 from arata.nn.param_setter import create_trainer
@@ -43,8 +44,7 @@ class Trainer():
             ChainedErrorHandler("An error occurred while training the AI", ErrorType.CRITICAL_ERROR)
             return
 
-        if not os.path.exists(ResourcePathConst.LOG_OUTPUT_PATH):
-            os.mkdir(ResourcePathConst.LOG_OUTPUT_PATH)
+        mkdir_recursive(ResourcePathConst.LOG_OUTPUT_PATH)
 
         setting_file_name = os.path.splitext(os.path.split(ResourcePathConst.TRAINING_CONFIG_PATH)[1])[0]
         file_name = "{0}_{1}{2}".format(setting_file_name, datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'), '.json')

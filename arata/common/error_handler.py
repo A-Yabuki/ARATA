@@ -68,7 +68,7 @@ class InterruptedErrorHandler(ErrorHandler):
 
         if error_no == ErrorType.INTERRUPTED_ERROR:
             self.inform(msg, error_no, file_name, func_name)
-            Logger.write_info(msg)
+            Logger.write_warning(msg)
             return True
 
         else:
@@ -88,7 +88,7 @@ class CriticalErrorHandler(ErrorHandler):
         if error_no == ErrorType.CRITICAL_ERROR:               
             self.inform(msg, error_no, file_name, func_name)
             Logger.write_critical(msg, file_name, func_name)  
-            sys.exit()
+            sys.exit(1)
 
         else:
             return False
@@ -125,7 +125,7 @@ class InvalidInputValueErrorHandler(ErrorHandler):
         if error_no == ErrorType.INVALID_INPUT_VALUE_ERROR:
             self.inform(msg, error_no, file_name, func_name)
             Logger.write_critical(msg, file_name, func_name)
-            sys.exit()
+            sys.exit(1)
 
         else:
 

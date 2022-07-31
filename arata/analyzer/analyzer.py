@@ -60,8 +60,7 @@ class Analyzer():
             self.__image_number_flag = False
 
         # Preprocess
-        preprocess = preprocessor.ImagePreprocessor(
-)
+        preprocess = preprocessor.ImagePreprocessor()
 
         # 位置合わせは二枚より多い時でないと機能しない
         condition = self.__image_number_flag & \
@@ -78,7 +77,7 @@ class Analyzer():
 
         # 対象画像全ての画面内に写っている部分だけ計算するか
         if condition & self.analysis_conf.config[AnalysisConfigJsonConst.INSCREEN_CALCULATION_MODE]:
-            self.__boundary = preprocess.find_position_constant_area()
+            self.__boundary = preprocess.find_area_appeared_in_all_images()
 
 
     @watch_error(
@@ -268,18 +267,18 @@ def analyze():
 
     # Preprocess
     AZ.preprocesses()
-
+   
     # Detect roots
     AZ.paints()    
 
     # Cancel noises in model outputs
-    AZ.postprocesses()
+    #AZ.postprocesses()
 
     # Create images showing production & gone 
-    AZ.creates_diff_images()
+    #AZ.creates_diff_images()
 
     # Calcurate parameters
-    AZ.calculates()
+    #AZ.calculates()
 
     # Log analysis information
     AZ.outputs_analysis_log()

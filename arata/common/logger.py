@@ -5,11 +5,9 @@ import os
 import traceback
 
 from .constants import ResourcePathConst
-
-def create_log_file():
-        
-    if not os.path.exists(ResourcePathConst.LOG_OUTPUT_PATH):
-        os.mkdir(ResourcePathConst.LOG_OUTPUT_PATH)
+from .enum import PlatformEnum
+from .globals import EnvironmentInfo
+from .platform_utils import mkdir_recursive
 
 
 class Logger():
@@ -21,7 +19,7 @@ class Logger():
     INFO = "info"
     ERROR = "error"
 
-    create_log_file()
+    mkdir_recursive(ResourcePathConst.LOG_OUTPUT_PATH)
     
     # level_name.. ログレベル
     # asctime.. 現時刻

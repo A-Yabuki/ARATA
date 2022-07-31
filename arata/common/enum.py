@@ -2,6 +2,18 @@
 
 from enum import IntEnum
 
+class PlatformEnum(IntEnum):
+    r"""
+    Platform
+    """
+    UNKNOWN = 0
+    WINDOWS = 1
+    LINUX = 2
+    DARWIN = 3
+    JAVA = 4
+
+
+
 class ModeEnum(IntEnum):
     r"""
     Launched application mode.

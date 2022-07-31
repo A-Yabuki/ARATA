@@ -4,7 +4,7 @@ import glob
 import os
 from typing import List, Sequence
 from .constants import ImageExtensionConst
-from .functions import numerical_sort
+from .sort_utils import numerical_sort
 
 
 def get_file_names(paths: Sequence[str]) -> List[str]:

@@ -11,8 +11,8 @@ from arata.analyzer.analyzer import analyze
 from arata.common.constants import MemoryMappedFileName
 from arata.common.enum import ModeEnum, UIEnum, ErrorType
 from arata.common.error_handler import ChainedErrorHandler, ErrorType
-from arata.common.globals import CurrentUI
-from arata.common.interprocess_communicator import Communicator, Message
+from arata.common.globals import CurrentUI, EnvironmentInfo
+from arata.common.interprocess_communicator import Communicator, Message, report_error
 from arata.trainer.trainer import train
 
 
@@ -76,6 +76,7 @@ if __name__ == "__main__":
     """
 
     try:
+
         mode = int(sys.argv[1])
         ui = int(sys.argv[2])
 
@@ -85,7 +86,6 @@ if __name__ == "__main__":
                 "Invalid argument is given.\n" \
                 "Required two arguments are 'mode' (1: analyzer, 2: trainer) and 'ui' (1: GUI, 2: CUI).", 
                 ErrorType.INVALID_INPUT_VALUE_ERROR)
-
 
     except IndexError:
         ChainedErrorHandler(
@@ -100,6 +100,15 @@ if __name__ == "__main__":
         
     else:
         CurrentUI(UIEnum(ui))
+
+        env_info = EnvironmentInfo()
+        if (not env_info.is_supported):
+            report_error(
+                "main", 
+                ErrorType.CRITICAL_ERROR, 
+                "This os is not supported.")
+            
+            sys.exit(1)
 
         fin_flag = True
         try:

@@ -33,7 +33,7 @@
     "isBool": false,
     "isNumeric": false,
     "sentence": "Image Format",
-    "value": "JPEG (.jpg\/.jpeg)"
+    "value": "TIF"
   },
   "InScreenCalculationMode": {
     "isBool": true,
@@ -57,13 +57,13 @@
     "isBool": true,
     "isNumeric": false,
     "sentence": "MultiScale Prediction",
-    "value": "True"
+    "value": "False"
   },
   "NetArcPath": {
     "isBool": false,
     "isNumeric": false,
     "sentence": "Network Architecture Settings Path",
-    "value": ""
+    "value": "./resources/check_point50.pth"
   },
   "PositionFixing": {
     "isBool": true,
@@ -93,13 +93,13 @@
     "isBool": false,
     "isNumeric": false,
     "sentence": "Save Path",
-    "value": ""
+    "value": "./save"
   },
   "SourcePath": {
     "isBool": false,
     "isNumeric": false,
     "sentence": "Source Path",
-    "value": ""
+    "value": "./data"
   },
   "TimeRange": {
     "isBool": false,
