@@ -29,7 +29,6 @@
     <Content Include="resources\analysis_configuration.json" />
     <Content Include="resources\blurmask.png" />
     <Content Include="resources\constants.json" />
-    <Content Include="resources\settings.json" />
     <Content Include="resources\training_configuration.json" />
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +50,6 @@
     <Compile Include="arata\analyzer\calculator\l1\_util.py" />
     <Compile Include="arata\analyzer\calculator\l1\__init__.py" />
     <Compile Include="arata\analyzer\calculator\dt.py" />
-    <Compile Include="arata\analyzer\calculator\root_identifier.py" />
     <Compile Include="arata\analyzer\calculator\skeletonizer.py" />
     <Compile Include="arata\analyzer\calculator\__init__.py" />
     <Compile Include="arata\analyzer\analyzer.py" />
@@ -66,7 +64,6 @@
     <Compile Include="arata\common\error_handler.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="arata\common\functions.py" />
     <Compile Include="arata\common\image_container.py" />
     <Compile Include="arata\common\image_tools.py" />
     <Compile Include="arata\common\interprocess_communicator.py">
@@ -139,10 +136,6 @@
     <Folder Include="arata\nn\vision\" />
     <Folder Include="arata\trainer\" />
     <Folder Include="resources" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterpreterReference Include="CondaEnv|CondaEnv|going_deeper" />
-    <InterpreterReference Include="CondaEnv|CondaEnv|test2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

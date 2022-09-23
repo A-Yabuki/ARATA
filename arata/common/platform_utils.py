@@ -9,7 +9,7 @@ def get_platform() -> PlatformEnum:
 
     sys_name = platform.system()
 
-    if sys_name == "Wndows":
+    if sys_name == "Windows":
         return PlatformEnum.WINDOWS
 
     elif sys_name == "Linux":
