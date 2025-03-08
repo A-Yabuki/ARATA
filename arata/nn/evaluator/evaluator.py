@@ -139,7 +139,7 @@ class Accuracy():
         return (self.pp)/(self.p)
 
     def dice_coef(self):
-        return self.tp / (2 * self.tp + self.fp + self.fn)
+        return self.tp / (self.tp + (self.fp + self.fn) * (1 / 2))
 
     def matthews_CC(self):
 
