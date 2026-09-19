@@ -95,9 +95,6 @@
     <Compile Include="arata\nn\network\deeplab_v3plus_xception.py" />
     <Compile Include="arata\nn\network\initial_weight.py" />
     <Compile Include="arata\nn\network\kernel_sharing_atrous_convolution.py" />
-    <Compile Include="arata\nn\network\solov2.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="arata\nn\network\__init__.py" />
     <Compile Include="arata\nn\normalizer\layer_norm.py" />
     <Compile Include="arata\nn\normalizer\__init__.py" />

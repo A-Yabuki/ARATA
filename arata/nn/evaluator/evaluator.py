@@ -138,6 +138,9 @@ class Accuracy():
     def area_ratio(self):
         return (self.pp)/(self.p)
 
+    def dice_coef(self):
+        return self.tp / (self.tp + (self.fp + self.fn) * (1 / 2))
+
     def matthews_CC(self):
 
         numerator = ((self.tp/self.called_num)*(self.tn/self.called_num) - (self.fp/self.called_num)*(self.fn/self.called_num))

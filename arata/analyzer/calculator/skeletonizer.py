@@ -31,7 +31,7 @@ def skeletonize(gray_src: 'np.ndarray (H, W, 3)') -> 'np.ndarray (H, W, 3)':
 
         prev = dst.clip(min=0)
 
-    return dst*255
+    return dst.astype(np.uint8)*255
 
 
 @njit('i1(i1[:])', cache=True)
@@ -61,7 +61,7 @@ def _evaluate_connection_index(b):
 
 # just in time compile with nopython mode
 @njit(numba.i1[:, :](numba.i1[:, :], numba.i4[:, :]), cache=True)
-def _skeletonizing(dst: 'np.ndarray[np.uint8] (H, W)', cnt: np.int) -> 'np.ndarray[np.uint8] (H, W)':
+def _skeletonizing(dst: 'np.ndarray[np.uint8] (H, W)', cnt: int) -> 'np.ndarray[np.uint8] (H, W)':
     """
     This function skeletonizes object in an binary image based on the Hilditch method.
     """
@@ -152,7 +152,7 @@ def _skeletonizing(dst: 'np.ndarray[np.uint8] (H, W)', cnt: np.int) -> 'np.ndarr
     return dst
 
 
-def _skeletonize_hilditch(src: 'np.ndarray[np.int] (H, W)'):
+def _skeletonize_hilditch(src: 'np.ndarray[np.int8] (H, W)'):
 
     """
     To employ just in time compile, 
@@ -166,14 +166,13 @@ def _skeletonize_hilditch(src: 'np.ndarray[np.int] (H, W)'):
     cnts, hierarchy = cv2.findContours(src.astype(
         np.uint8), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
 
-    cnts = np.array(
-        [np.squeeze(np.asarray(cnt, dtype=np.int32), axis=1) for cnt in cnts])
+    cnts = [np.squeeze(np.asarray(cnt, dtype=np.int32), axis=1) for cnt in cnts]
 
     # 親を持たない輪郭＝最外輪郭のみのindexを取り出す
     cnts_id = np.where((np.asarray(hierarchy[0], dtype=np.int32))[:, 3] == -1)
 
     # 最外輪郭のみ取り出す
-    cnts = cnts[cnts_id[0]]
+    cnts=[cnts[i] for i in cnts_id[0]]
 
     # reduce(function, iterable, initializer) ... loop function(returned_value(or initializer), iterable's element)
     return reduce(_skeletonizing, cnts, dst)

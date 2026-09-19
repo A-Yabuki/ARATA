@@ -1,8 +1,10 @@
 # coding: utf-8
 
+from collections import namedtuple
 import cv2
 import numpy as np
 import os
+import pandas as pd
 import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
@@ -30,10 +32,15 @@ class Validator():
 
         self.val_acc_shift = []
         self.val_mcc_shift = []
+        self.val_dice_shift = []
         self.val_iou_shift = []
 
         self.val_acc_calculator = Accuracy()
         self.val_iou_calculator = Jaccard(num_cl=DeepLabSettings.num_class, eps=1e-8, ignore_label=[2])
+
+        self.csv_columns = [
+            "Epoch", "Iteration", "Learning Rate", "Loss", "Loss(Validation)",
+            "Accuracy", "Dice Coefficient", "MCC", "Mean IoU"]
         
 
     def append_loss_value(self, loss):
@@ -81,6 +88,7 @@ class Validator():
             
         self.val_acc_shift.append(self.val_acc_calculator.accuracy())
         self.val_mcc_shift.append(self.val_acc_calculator.matthews_CC())
+        self.val_dice_shift.append(self.val_acc_calculator.dice_coef())
         self.val_iou_shift.append(self.val_iou_calculator.jaccard())
         self.val_acc_calculator.clear()
         self.val_iou_calculator.clear()
@@ -95,13 +103,28 @@ class Validator():
                 self.trainer.scheduler.get_last_lr()[0], self.loss_shift[-1], 
                 self.val_loss_shift[-1])
 
+        csv_outpath = self.out_path+'/learning_progress.csv'
+        out_header = not os.path.exists(csv_outpath)
+        dt = pd.DataFrame(np.array([[
+            self.trainer.epoch,
+            self.trainer.epoch * self.train_data_num,
+            self.trainer.scheduler.get_last_lr()[0],
+            self.loss_shift[-1],
+            self.val_loss_shift[-1],
+            self.val_acc_shift[-1],
+            self.val_dice_shift[-1],
+            self.val_mcc_shift[-1],
+            self.val_iou_shift[-1],
+        ]]))
+
+        dt.to_csv(csv_outpath, sep=',', mode='a', header=out_header, index=False)
+
         report_progress('training', int(progress), msg)
 
         # print learning progress
 
         if (self.trainer.output_graph_flag and (self.trainer.epoch % self.trainer.output_graph_interval == 0)):
-                        
+
             progress_viz.graph_viz(self.out_path+'/progress.png', 'loss', ('train', self.loss_shift),('val', self.val_loss_shift))
-            progress_viz.graph_viz(self.out_path+'/val_accuracy.png', 'Acc&MCC', ('Acc', self.val_acc_shift),('MCC', self.val_mcc_shift))
+            progress_viz.graph_viz(self.out_path+'/val_accuracy.png', 'Acc&MCC', ('Acc', self.val_acc_shift),('MCC', self.val_mcc_shift),('DICE', self.val_dice_shift))
             progress_viz.graph_viz(self.out_path+'/val_jaccard.png', 'MeanIoU', ('MeanIoU', self.val_iou_shift))
-                    
