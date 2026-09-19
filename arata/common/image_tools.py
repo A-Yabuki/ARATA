@@ -76,7 +76,7 @@ class PhaseOnlyCorrelation():
     @staticmethod
     def relocate(actor: 'np.ndarray[np.uint8]', stage: 'np.ndarray[np.uint8]') -> Tuple['np.ndarray[np.uint8]', Tuple[int, int]]:
 
-        """ position shift correction by phase only correlation """
+        """Correct the position and return the applied shift as (dy, dx)."""
 
         gray_actor = cv2.cvtColor(actor, cv2.COLOR_BGR2GRAY)
         gray_stage = cv2.cvtColor(stage, cv2.COLOR_BGR2GRAY)
@@ -100,8 +100,8 @@ class PhaseOnlyCorrelation():
             raise(ArithmeticError(error_message))
 
         else:
-            dy, dx = distance
-            M = np.float32([[1, 0, dy], [0, 1, dx]])
+            dx, dy = distance
+            M = np.float32([[1, 0, dx], [0, 1, dy]])
             acted = cv2.warpAffine(actor, M, (cols, rows))
 
             return acted, (int(dy), int(dx))

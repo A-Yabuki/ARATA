@@ -55,20 +55,20 @@ class Predictor(NNClientBase):
                              model: NNBase, scales: List[float]) -> 'np.ndarray[np.uint8] (H, W, 3)':
 
         outputs = []
+        original_h, original_w = input.shape[:2]
         
         for scale in scales:
 
             resized_input = self._multi_scaler(input, scale)
             pred = self._predict(resized_input, model)
-            
-            original_size_pred = self._multi_scaler(pred, 1/scale)
-            original_h, original_w = input.shape[:2]
-            pred_h, pred_w = original_size_pred.shape[:2]
 
-            # multiscale時、元のサイズに戻しても端数が発生する事があるので、
-            # エラーにならないよう整形
-            if (original_h != pred_h or original_w != pred_w):
-                original_size_pred[:original_h, :original_w, :]
+            # Remove extra pixels introduced by the network's down/upsampling.
+            resized_h, resized_w = resized_input.shape[:2]
+            pred = pred[:resized_h, :resized_w, :]
+
+            # Use explicit dimensions to avoid rounding errors from inverse scaling.
+            original_size_pred = cv2.resize(
+                pred, (original_w, original_h), interpolation=cv2.INTER_CUBIC)
             
             outputs.append(original_size_pred)
 

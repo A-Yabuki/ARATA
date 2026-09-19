@@ -40,7 +40,8 @@ class RootPainter():
             crop_size (int): crop size
             dpi (int): dpi
             multi_scale (bool): use multi scale or not
-            roi (((int, int), (int, int))): region of interest
+            roi (((int, int), (int, int))): ((min_dy, max_dy), (min_dx, max_dx))
+                shifts from the first image, used to crop the common region
             class_dict (Dict): dictionary having class informations
         """
 
@@ -56,25 +57,36 @@ class RootPainter():
 
             file_name, _ = read_file_name(split_path(img_path)[1])
             img = imread(img_path, cv2.IMREAD_COLOR)
+            original_h, original_w = img.shape[:2]
             
             # Add padding, such that the image size can be divided by the crop size
 
-            img, (pad_top, pad_bottom, pad_left, pad_right) = self._pad(img, crop_size)
+            img, (pad_top, _, pad_left, _) = self._pad(img, crop_size)
             hs, ws, cropped = self._crop(img, crop_size)
             flat = list(chain.from_iterable(cropped))
 
             preds = predictor.predict(flat, multi_scale)
+
+            if len(preds) != len(flat) or any(
+                    pred.shape[:2] != tile.shape[:2] for pred, tile in zip(preds, flat)):
+                raise ValueError("Prediction tiles must match the number and size of input tiles.")
             
             merged = self._merge(preds, hs, ws)
 
-            original_size_merged = merged[pad_top : merged.shape[0] - pad_bottom, pad_left : merged.shape[1] - pad_right]
+            original_size_merged = merged[
+                pad_top : pad_top + original_h, pad_left : pad_left + original_w]
             colored = self._colorize(original_size_merged, class_dict)
 
             h, w = colored.shape[:-1]
-            min_y = roi[0][0] if roi[0][0] > 0 else 0
-            min_x = roi[1][0] if roi[1][0] > 0 else 0
-            max_y = h + roi[0][1] if roi[0][1] < 0 else h
-            max_x = w + roi[1][1] if roi[1][1] < 0 else w
+
+            # Intersect all translated image bounds on the first image's canvas.
+            min_y = max(0, roi[0][1])
+            min_x = max(0, roi[1][1])
+            max_y = h + min(0, roi[0][0])
+            max_x = w + min(0, roi[1][0])
+
+            if min_y >= max_y or min_x >= max_x:
+                raise ValueError("Images have no common region after position correction.")
             
             out = colored[min_y : max_y, min_x : max_x]
             out_path = "{0}/{1}.png".format(dst, file_name)

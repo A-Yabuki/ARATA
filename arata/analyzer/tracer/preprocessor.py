@@ -35,6 +35,9 @@ class ImagePreprocessor():
         if not hasinstances(src_paths, str) or isempty(src_paths):
             raise Exception("Invalid argument was given. [args: src_paths]")
 
+        self._boundary_y.clear()
+        self._boundary_x.clear()
+
         base_img = ExifReader.restore_original_orientation(src_paths[0])
         
         if auto_dpi:
@@ -61,7 +64,6 @@ class ImagePreprocessor():
                 result = target_img
 
             self._save(result, src_path, dst)
-            #base_img  = result
 
             report_progress("preprocessing", (i+2) * 100 // len(src_paths), "")
 
@@ -69,7 +71,7 @@ class ImagePreprocessor():
     def find_area_appeared_in_all_images(self) -> Tuple[Tuple[int, int], Tuple[int, int]]:
 
         r"""
-        Calculates min-max values of the relative distance against the initial position.
+        Calculates min-max shifts from the first image, including its zero shift.
 
         0 > y : moving  upward compared to initial position.
         0 < y : moving downward
@@ -83,17 +85,15 @@ class ImagePreprocessor():
             x_max (int): x max value
         """
 
-        relative_x = np.asarray(self._boundary_x, dtype=np.int16)
-        relative_y = np.asarray(self._boundary_y, dtype=np.int16)
-
-        absolute_x = np.cumsum(relative_x)
-        absolute_y = np.cumsum(relative_y)
+        # Each shift is already relative to the unchanged first image.
+        absolute_x = [0] + self._boundary_x
+        absolute_y = [0] + self._boundary_y
         
-        x_min = np.min(absolute_x)
-        x_max = np.max(absolute_x)
+        x_min = min(absolute_x)
+        x_max = max(absolute_x)
 
-        y_min = np.min(absolute_y)
-        y_max = np.max(absolute_y)
+        y_min = min(absolute_y)
+        y_max = max(absolute_y)
 
         return ((y_min, y_max), (x_min, x_max))
 
